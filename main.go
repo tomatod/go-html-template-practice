@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	// showTemplate()
+	showTemplate()
 	server()
 }
 
@@ -25,7 +25,8 @@ func showTemplate() {
 }
 
 func server() {
-	http.HandleFunc("/", templateHandle)
+	http.HandleFunc("/a", templateHandle)
+	http.HandleFunc("/b", templateAllInAFileHandle)
 	http.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css/"))))
 	http.ListenAndServe(":8080", nil)
 }
@@ -36,5 +37,14 @@ func templateHandle(w http.ResponseWriter, r *http.Request) {
 		Message string
 	}{
 		"hello!",
+	})
+}
+
+func templateAllInAFileHandle(w http.ResponseWriter, r *http.Request) {
+	t, _ := template.ParseFiles("allInAFile.html")
+	t.Execute(w, struct {
+		Message string
+	}{
+		"All in a file!",
 	})
 }

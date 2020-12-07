@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{{template "header" .}}
+{{template "body" .}}
+</html>
+
+{{define "header"}}
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>All in a file</title>
+</head>
+{{end}}
+
+{{define "body"}}
+<body>
+    <div>{{.Message}}</div>
+</body>
+{{end}}
